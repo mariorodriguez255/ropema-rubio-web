@@ -1,0 +1,6 @@
+# robots.txt for ropemarubio.com and ropemarubio.es
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ropemarubio.com/sitemap.xml

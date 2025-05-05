@@ -1,0 +1,40 @@
+/* Animaciones para el menú móvil */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOutUp {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+.menu-enter {
+  animation: fadeIn 0.3s ease forwards, slideInDown 0.3s ease forwards;
+}
+
+.menu-exit {
+  animation: fadeIn 0.3s ease backwards reverse, slideOutUp 0.3s ease forwards;
+}
+
+/* Mejoras para la accesibilidad en enfoque */
+.focus-visible-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+}
