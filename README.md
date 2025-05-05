@@ -8,19 +8,8 @@
 ## Overview
 
 This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+Any changes you make to your deployed app will be automatically pushed to this repository.
 
-## Deployment
-
-Your project is live at:
-
-**[https://vercel.com/mariorodriguez255s-projects/v0-ropema-rubio-website](https://vercel.com/mariorodriguez255s-projects/v0-ropema-rubio-website)**
-
-## Build your app
-
-Continue building your app on:
-
-**[https://v0.dev/chat/projects/rGkzMN3Vsq2](https://v0.dev/chat/projects/rGkzMN3Vsq2)**
 
 ## How It Works
 
