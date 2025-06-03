@@ -2,12 +2,10 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Menu, X, Phone, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { usePathname } from "next/navigation"
-
-// Importar el nuevo componente LogoWithBackground
-import LogoWithBackground from "./logo-with-background"
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -55,23 +53,27 @@ export default function Navbar() {
 
   // Texto que cambia según el estado del scroll
   const textColor = isScrolled ? "text-gray-900" : "text-white"
-  const logoTextColor = isScrolled ? "text-gray-900" : "text-white"
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerBg}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${headerBg}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
-            <LogoWithBackground
-              isScrolled={isScrolled}
-              className="transform group-hover:scale-110 transition-transform duration-300"
-            />
-            <span className={`font-bold text-lg ${logoTextColor} transition-colors duration-300`}>Ropema Rubio</span>
+          <Link href="/" className="flex items-center space-x-2 group">
+            <div className="relative h-10 w-10 transform group-hover:scale-110 transition-transform duration-300">
+              <Image
+                src="/images/logo/ropema-logo.png"
+                alt="Ropema Rubio Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+            <span className={`font-bold transition-colors duration-300 ${textColor}`}>Ropema Rubio</span>
           </Link>
 
           {/* Navegación de escritorio */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -95,45 +97,35 @@ export default function Navbar() {
 
           {/* Botón de menú móvil */}
           <button
-            className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors duration-300"
+            className="md:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={isMenuOpen}
           >
-            {isMenuOpen ? (
-              <X className="h-6 w-6 text-gray-900" />
-            ) : (
-              <Menu className={`h-6 w-6 ${textColor} transition-colors duration-300`} />
-            )}
+            {isMenuOpen ? <X className="h-6 w-6 text-white" /> : <Menu className={`h-6 w-6 ${textColor}`} />}
           </button>
         </div>
       </div>
 
-      {/* Menú móvil modernizado */}
+      {/* Menú móvil con color menos intenso */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200/50 shadow-xl">
-          <div className="container mx-auto px-4 py-6">
-            <nav className="flex flex-col space-y-4">
+        <div className="md:hidden bg-gray-800/80 backdrop-blur-md border-t border-gray-700/50">
+          <div className="container mx-auto px-4 py-4">
+            <nav className="flex flex-col space-y-3">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`py-3 px-4 rounded-xl text-base font-medium transition-all duration-300 ${
-                    pathname === link.href
-                      ? "bg-primary/10 text-primary font-semibold"
-                      : "text-gray-700 hover:bg-gray-100/80 hover:text-primary"
+                  className={`py-2 px-3 rounded-md text-base ${
+                    pathname === link.href ? "bg-primary/20 text-primary font-medium" : "text-white hover:bg-white/10"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.name}
                 </Link>
               ))}
-
-              <div className="pt-4 border-t border-gray-200/50">
-                <Button
-                  asChild
-                  className="w-full justify-center bg-gradient-to-r from-primary to-green-600 hover:from-green-600 hover:to-primary transition-all duration-300"
-                >
+              <div className="pt-3 border-t border-gray-600/50 mt-2">
+                <Button asChild className="w-full justify-center">
                   <Link href="/#contact" onClick={() => setIsMenuOpen(false)}>
                     Contactar
                   </Link>
@@ -141,25 +133,24 @@ export default function Navbar() {
               </div>
 
               {/* Información de contacto mejorada */}
-              <div className="pt-4 border-t border-gray-200/50 space-y-4">
+              <div className="pt-3 border-t border-gray-600/50 mt-2 space-y-4">
                 <Link
                   href="tel:+34625506334"
-                  className="flex items-center space-x-3 p-3 rounded-xl bg-gradient-to-r from-blue-50 to-primary/5 hover:from-blue-100 hover:to-primary/10 transition-all duration-300 group"
+                  className="flex items-center space-x-3 p-2 rounded-md bg-white/10 hover:bg-white/15 transition-colors"
                 >
-                  <div className="bg-gradient-to-br from-blue-500 to-primary p-2 rounded-lg shadow-md group-hover:scale-110 transition-transform duration-300">
-                    <Phone className="h-5 w-5 text-white" />
+                  <div className="bg-primary/20 p-2 rounded-full">
+                    <Phone className="h-5 w-5 text-primary" />
                   </div>
-                  <span className="text-gray-700 font-medium">+34 625 50 63 34</span>
+                  <span className="text-white font-medium">+34 625 50 63 34</span>
                 </Link>
-
                 <Link
                   href="mailto:manuelropema@gmail.com"
-                  className="flex items-center space-x-3 p-3 rounded-xl bg-gradient-to-r from-primary/5 to-green-50 hover:from-primary/10 hover:to-green-100 transition-all duration-300 group"
+                  className="flex items-center space-x-3 p-2 rounded-md bg-white/10 hover:bg-white/15 transition-colors"
                 >
-                  <div className="bg-gradient-to-br from-primary to-green-600 p-2 rounded-lg shadow-md group-hover:scale-110 transition-transform duration-300">
-                    <Mail className="h-5 w-5 text-white" />
+                  <div className="bg-primary/20 p-2 rounded-full">
+                    <Mail className="h-5 w-5 text-primary" />
                   </div>
-                  <span className="text-gray-700 font-medium text-sm break-all">manuelropema@gmail.com</span>
+                  <span className="text-white font-medium break-all">manuelropema@gmail.com</span>
                 </Link>
               </div>
             </nav>

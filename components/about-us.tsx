@@ -3,9 +3,12 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Award, Clock, Users, Gem } from "lucide-react"
 
 export default function AboutUs() {
+  // Definir una imagen de respaldo
+  const fallbackImage = "/placeholder.svg?height=800&width=600"
+
   const features = [
     {
-      icon: <Award className="h-8 w-8 text-blue-500" />,
+      icon: <Award className="h-8 w-8 text-primary" />,
       title: "Calidad Premium en Mármoles y Granitos",
       description: "Seleccionamos los mejores materiales para garantizar resultados excepcionales en cada proyecto.",
     },
@@ -15,12 +18,12 @@ export default function AboutUs() {
       description: "Desde 1946 perfeccionando el arte del mármol, granito y porcelánicos en Madrid.",
     },
     {
-      icon: <Users className="h-8 w-8 text-green-600" />,
+      icon: <Users className="h-8 w-8 text-primary" />,
       title: "Equipo Profesional Especializado",
       description: "Artesanos con amplia formación y experiencia en el trabajo con piedra natural y porcelánicos.",
     },
     {
-      icon: <Gem className="h-8 w-8 text-teal-500" />,
+      icon: <Gem className="h-8 w-8 text-primary" />,
       title: "Proyectos Personalizados",
       description:
         "Adaptamos cada trabajo a las necesidades específicas de nuestros clientes, desde el diseño hasta la instalación.",
@@ -49,55 +52,51 @@ export default function AboutUs() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl group">
             <Image
               src="/images/about/fachada-taller-corregido.jpg"
               alt="Fachada del taller de Ropema Rubio en Madrid - Especialistas en mármoles y granitos"
               fill
               className="object-cover rounded-2xl transition-transform duration-700 group-hover:scale-105"
-              sizes="(max-width: 1024px) 100vw, 50vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
           </div>
 
-          <div className="space-y-6">
-            <h3 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
-              Nuestra Historia en el Sector del Mármol y Granito
-            </h3>
-            <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
-              <p>
-                Fundada en 1946, Ropema Rubio nació como un pequeño taller familiar especializado en la artesanía del
-                mármol en Madrid. A lo largo de más de siete décadas, hemos evolucionado hasta convertirnos en una
-                empresa de referencia en el sector, manteniendo siempre nuestra esencia: la pasión por el trabajo bien
-                hecho en mármoles, granitos y porcelánicos.
-              </p>
-              <p>
-                Nuestra filosofía se basa en combinar técnicas tradicionales con las últimas innovaciones tecnológicas,
-                permitiéndonos ofrecer soluciones personalizadas en piedra natural y porcelánicos que satisfacen las
-                necesidades más exigentes de nuestros clientes en Madrid y alrededores.
-              </p>
-              <p>
-                Hoy, con la tercera generación al frente, seguimos comprometidos con la excelencia y la calidad que han
-                definido nuestra trayectoria desde el primer día, ofreciendo los mejores servicios en mármoles, granitos
-                y porcelánicos.
-              </p>
-            </div>
+          <div>
+            <h3 className="text-2xl font-bold mb-4">Nuestra Historia en el Sector del Mármol y Granito</h3>
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
+              Fundada en 1946, Ropema Rubio nació como un pequeño taller familiar especializado en la artesanía del
+              mármol en Madrid. A lo largo de más de siete décadas, hemos evolucionado hasta convertirnos en una empresa
+              de referencia en el sector, manteniendo siempre nuestra esencia: la pasión por el trabajo bien hecho en
+              mármoles, granitos y porcelánicos.
+            </p>
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
+              Nuestra filosofía se basa en combinar técnicas tradicionales con las últimas innovaciones tecnológicas,
+              permitiéndonos ofrecer soluciones personalizadas en piedra natural y porcelánicos que satisfacen las
+              necesidades más exigentes de nuestros clientes en Madrid y alrededores.
+            </p>
+            <p className="text-gray-600 dark:text-gray-300">
+              Hoy, con la tercera generación al frente, seguimos comprometidos con la excelencia y la calidad que han
+              definido nuestra trayectoria desde el primer día, ofreciendo los mejores servicios en mármoles, granitos y
+              porcelánicos.
+            </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
           {features.map((feature, index) => (
             <Card
               key={index}
               className="border-none shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 bg-white/80 backdrop-blur-sm dark:bg-gray-800/80 group"
             >
               <CardContent className="p-8 text-center relative overflow-hidden">
-                <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 p-4 shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-green-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-primary/10 to-green-600/10 p-4 shadow-lg transform group-hover:scale-110 transition-transform duration-300 relative z-10">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{feature.description}</p>
+                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white relative z-10">{feature.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed relative z-10">{feature.description}</p>
               </CardContent>
             </Card>
           ))}
