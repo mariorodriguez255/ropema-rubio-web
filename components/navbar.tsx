@@ -60,7 +60,9 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group">
-            <div className="relative h-10 w-10 transform group-hover:scale-110 transition-transform duration-300">
+            <div
+              className={`relative h-10 w-10 transform group-hover:scale-110 transition-all duration-300 rounded-md ${isScrolled ? "bg-black/90 p-1" : ""}`}
+            >
               <Image
                 src="/images/logo/ropema-logo.png"
                 alt="Ropema Rubio Logo"
@@ -107,50 +109,63 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Menú móvil con color menos intenso */}
+      {/* Menú móvil mejorado */}
       {isMenuOpen && (
-        <div className="md:hidden bg-gray-800/80 backdrop-blur-md border-t border-gray-700/50">
-          <div className="container mx-auto px-4 py-4">
-            <nav className="flex flex-col space-y-3">
+        <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200/50 shadow-xl">
+          <div className="container mx-auto px-4 py-6">
+            <nav className="flex flex-col space-y-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`py-2 px-3 rounded-md text-base ${
-                    pathname === link.href ? "bg-primary/20 text-primary font-medium" : "text-white hover:bg-white/10"
+                  className={`py-3 px-4 rounded-xl text-base font-medium transition-all duration-300 ${
+                    pathname === link.href
+                      ? "bg-gradient-to-r from-primary to-green-600 text-white shadow-lg transform scale-105"
+                      : "text-gray-700 hover:bg-gradient-to-r hover:from-primary/10 hover:to-green-600/10 hover:text-primary"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.name}
                 </Link>
               ))}
-              <div className="pt-3 border-t border-gray-600/50 mt-2">
-                <Button asChild className="w-full justify-center">
+
+              <div className="pt-4 border-t border-gray-200 mt-4">
+                <Button
+                  asChild
+                  className="w-full justify-center bg-gradient-to-r from-primary to-green-600 hover:from-green-600 hover:to-primary transform hover:scale-105 transition-all duration-300 shadow-lg"
+                >
                   <Link href="/#contact" onClick={() => setIsMenuOpen(false)}>
-                    Contactar
+                    Contactar Ahora
                   </Link>
                 </Button>
               </div>
 
               {/* Información de contacto mejorada */}
-              <div className="pt-3 border-t border-gray-600/50 mt-2 space-y-4">
+              <div className="pt-4 border-t border-gray-200 mt-4 space-y-3">
                 <Link
                   href="tel:+34625506334"
-                  className="flex items-center space-x-3 p-2 rounded-md bg-white/10 hover:bg-white/15 transition-colors"
+                  className="flex items-center space-x-3 p-4 rounded-xl bg-gradient-to-r from-gray-50 to-primary/5 hover:from-primary/10 hover:to-green-600/10 transition-all duration-300 transform hover:scale-105 shadow-sm"
                 >
-                  <div className="bg-primary/20 p-2 rounded-full">
-                    <Phone className="h-5 w-5 text-primary" />
+                  <div className="bg-gradient-to-r from-primary to-green-600 p-3 rounded-xl shadow-lg">
+                    <Phone className="h-5 w-5 text-white" />
                   </div>
-                  <span className="text-white font-medium">+34 625 50 63 34</span>
+                  <div>
+                    <p className="text-xs text-gray-500 font-medium">Teléfono</p>
+                    <span className="text-gray-900 font-semibold">+34 625 50 63 34</span>
+                  </div>
                 </Link>
+
                 <Link
                   href="mailto:manuelropema@gmail.com"
-                  className="flex items-center space-x-3 p-2 rounded-md bg-white/10 hover:bg-white/15 transition-colors"
+                  className="flex items-center space-x-3 p-4 rounded-xl bg-gradient-to-r from-gray-50 to-primary/5 hover:from-primary/10 hover:to-green-600/10 transition-all duration-300 transform hover:scale-105 shadow-sm"
                 >
-                  <div className="bg-primary/20 p-2 rounded-full">
-                    <Mail className="h-5 w-5 text-primary" />
+                  <div className="bg-gradient-to-r from-primary to-green-600 p-3 rounded-xl shadow-lg">
+                    <Mail className="h-5 w-5 text-white" />
                   </div>
-                  <span className="text-white font-medium break-all">manuelropema@gmail.com</span>
+                  <div>
+                    <p className="text-xs text-gray-500 font-medium">Email</p>
+                    <span className="text-gray-900 font-semibold text-sm break-all">manuelropema@gmail.com</span>
+                  </div>
                 </Link>
               </div>
             </nav>

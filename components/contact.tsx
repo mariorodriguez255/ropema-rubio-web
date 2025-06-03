@@ -136,9 +136,9 @@ export default function Contact() {
                   <div>
                     <h4 className="font-semibold mb-1">Horario</h4>
                     <p className="text-gray-600 dark:text-gray-300">
-                      Lun - Vie: 9:00 - 18:00
+                      Lun - Vie: 7:00 - 15:00
                       <br />
-                      Sáb: 9:00 - 14:00
+                      Fines de semana: Cerrado
                     </p>
                   </div>
                 </CardContent>
