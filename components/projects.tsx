@@ -7,188 +7,92 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 
 export default function Projects() {
-  const categories = ["Todos", "Encimeras", "Revestimientos", "Escaleras", "Baños", "Recepciones", "Chimeneas", "Mesas"]
+  const categories = ["Todos", "Encimeras", "Revestimientos", "Escaleras", "Baños", "Recepciones"]
   const [activeCategory, setActiveCategory] = useState("Todos")
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [mounted, setMounted] = useState(false)
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  // Proyectos con las nuevas imágenes clasificadas
+  // Proyectos simplificados con imágenes locales
   const projects = [
     {
       id: 1,
-      category: "Encimeras",
-      title: "Cocina con Encimera de Mármol Gris",
-      description: "Elegante cocina con encimeras de mármol gris veteado y muebles de madera clara",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/94b62b09-57e2-428c-b335-12160e343011-LCLlHngV1RiWDCmWniyzWlGqrplNGV.webp",
-      alt: "Cocina moderna con encimeras de mármol gris veteado - Ropema Rubio Madrid",
+      category: "Recepciones",
+      title: "Mostrador de Recepción en Mármol Negro",
+      description: "Elegante mostrador de recepción en mármol negro con acabado pulido",
+      image: "/images/projects/recepcion-marmol-negro.jpg",
+      alt: "Mostrador de recepción en mármol negro - Ropema Rubio Madrid",
     },
     {
       id: 2,
       category: "Revestimientos",
-      title: "Panel de Mármol Negro Marquina",
-      description: "Revestimiento de pared en mármol negro con vetas blancas características",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ad53278b-8ffc-4a8a-9462-8ed040d71e40-JfASTZovcZ4O2KUOTqAyu4IbWhsOOK.webp",
-      alt: "Panel de mármol negro con vetas blancas - Ropema Rubio Madrid",
+      title: "Chimenea con Revestimiento de Mármol",
+      description: "Chimenea moderna con revestimiento de mármol gris veteado",
+      image: "/images/projects/chimenea-marmol-gris.jpg",
+      alt: "Chimenea con revestimiento de mármol gris - Ropema Rubio",
     },
     {
       id: 3,
-      category: "Encimeras",
-      title: "Cocina Moderna con Mármol Veteado",
-      description: "Diseño contemporáneo con encimeras y revestimiento en mármol gris con vetas doradas",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/21615123-ca2e-46bc-aea0-e6fcc8e01e45-Y8se45JCEgOTCOTJTak5lUE4WYnygc.webp",
-      alt: "Cocina moderna con encimeras y revestimiento de mármol gris con vetas doradas - Ropema Rubio",
+      category: "Revestimientos",
+      title: "Columnas de Mármol Clásicas",
+      description: "Columnas decorativas en mármol blanco con acabado clásico",
+      image: "/images/projects/columnas-marmol.jpg",
+      alt: "Columnas de mármol blanco clásicas - Ropema Rubio Madrid",
     },
     {
       id: 4,
-      category: "Escaleras",
-      title: "Escalera Flotante con Barandilla de Cristal",
-      description: "Elegante escalera de mármol beige con diseño flotante y barandilla de cristal",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/257c3519-67b3-4c9b-9d47-187e95f61310-9dMfOsoG4ut4e0NQqjvR2Ku5pos7zA.webp",
-      alt: "Escalera moderna de mármol beige con barandilla de cristal - Ropema Rubio",
+      category: "Revestimientos",
+      title: "Salón con Revestimiento de Mármol Negro",
+      description: "Elegante salón con paredes revestidas en mármol negro",
+      image: "/images/projects/salon-marmol-negro.jpg",
+      alt: "Salón con revestimiento de mármol negro - Ropema Rubio",
     },
     {
       id: 5,
       category: "Escaleras",
       title: "Escalera Curva con Iluminación LED",
-      description: "Innovador diseño de escalera curva en mármol con iluminación LED integrada",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/230d8ff5-65fb-4194-83b8-28ad518e75dc-sVZpprnka5aLPIOLcDjRvgEiIec7CT.webp",
-      alt: "Escalera curva de mármol con iluminación LED integrada - Ropema Rubio Madrid",
+      description: "Escalera curva en mármol con iluminación LED integrada",
+      image: "/images/projects/escalera-curva-led.jpg",
+      alt: "Escalera curva con LED - Ropema Rubio Madrid",
     },
     {
       id: 6,
       category: "Revestimientos",
-      title: "Showroom con Nichos Iluminados",
-      description: "Espacio comercial con paredes de mármol blanco y nichos con iluminación integrada",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/727081cb-2715-47a7-bd0a-0244b6a90b64-6DtbSoCniX82wZlgobNLXtrcAVchDv.webp",
-      alt: "Interior moderno con paredes de mármol blanco y nichos iluminados - Ropema Rubio",
+      title: "Showroom de Mármol",
+      description: "Showroom con diferentes tipos de mármol y acabados",
+      image: "/images/projects/showroom-marmol.jpg",
+      alt: "Showroom de mármol - Ropema Rubio",
     },
     {
       id: 7,
-      category: "Baños",
-      title: "Revestimiento de Baño en Mármol Blanco",
-      description: "Elegante pared de baño completamente revestida en mármol blanco con vetas grises",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/b5b5432c-a6c0-4600-8d76-a95305e224d8-AAc3hoWD35UsVEAgtMJYlqdPmjCRhW.webp",
-      alt: "Pared de baño revestida en mármol blanco con vetas grises - Ropema Rubio",
+      category: "Escaleras",
+      title: "Escalera con Iluminación LED",
+      description: "Escalera moderna con iluminación LED perimetral",
+      image: "/images/projects/escalera-led-oscura.jpg",
+      alt: "Escalera con iluminación LED - Ropema Rubio Madrid",
     },
     {
       id: 8,
       category: "Baños",
-      title: "Cabina de Ducha en Mármol Veteado",
-      description: "Exclusiva cabina de ducha revestida en mármol blanco con vetas marrones pronunciadas",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/34bd712c-cb3c-4808-bbc1-4af5f1516392-avU44sbSOJDWUWKvXGr8l0vD2Ra1xX.webp",
-      alt: "Cabina de ducha en mármol blanco con vetas marrones - Ropema Rubio Madrid",
+      title: "Baño en Mármol Gris",
+      description: "Baño completo revestido en mármol gris veteado",
+      image: "/images/projects/bano-marmol-gris.jpg",
+      alt: "Baño en mármol gris - Ropema Rubio",
     },
     {
       id: 9,
-      category: "Chimeneas",
-      title: "Sala de Estar con Chimenea Integrada",
-      description: "Diseño contemporáneo de sala con pared de mármol blanco y chimenea integrada",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bcc91625-f5cb-45bd-b936-38b9aed62be9-LRu6620zmVoVddL70euKt2sOGVDLA5.webp",
-      alt: "Sala de estar con pared de mármol blanco y chimenea integrada - Ropema Rubio",
+      category: "Encimeras",
+      title: "Mueble con Encimera de Mármol",
+      description: "Mueble de salón con encimera de mármol blanco",
+      image: "/images/projects/salon-mueble-marmol.jpg",
+      alt: "Mueble con encimera de mármol - Ropema Rubio Madrid",
     },
     {
       id: 10,
-      category: "Recepciones",
-      title: "Mostrador de Recepción Geométrico",
-      description: "Impresionante mostrador de recepción en mármol negro con diseño angular moderno",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/638665f2-ef13-4271-9ba2-ac8e488b5a70-jGwJhEVOYw9IbAQgyAIQM8Hl9yRyIW.webp",
-      alt: "Mostrador de recepción en mármol negro con diseño geométrico - Ropema Rubio Madrid",
-    },
-    {
-      id: 11,
-      category: "Recepciones",
-      title: "Mostrador en Proceso de Fabricación",
-      description: "Vista del proceso de fabricación de mostrador de recepción en mármol blanco en nuestro taller",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/11bd09fb-0de1-492b-b43e-1327822da1b7-x4gpeOOqiFUaO2aNzsiR8HCXsWewk8.webp",
-      alt: "Proceso de fabricación de mostrador de mármol blanco en taller Ropema Rubio",
-    },
-    {
-      id: 12,
-      category: "Baños",
-      title: "Baño de Lujo con Hidromasaje",
-      description: "Elegante baño con bañera de hidromasaje y lavabos dobles en mármol gris veteado",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/9ee309e0-c96e-422d-96c8-110ac33b6ce0%202-L7RUBYPz1fB6OLEJX20sqz6bgahWG2.webp",
-      alt: "Baño de lujo con bañera de hidromasaje y lavabos en mármol gris - Ropema Rubio",
-    },
-    {
-      id: 13,
-      category: "Encimeras",
-      title: "Cocina con Encimeras de Mármol Beige",
-      description: "Moderna cocina con encimeras de mármol beige veteado y muebles en tonos tierra",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/14f1ca39-3222-41e2-92ca-6bb62b888543-3Fr4sDPMYHJqhqoQHB1iuCH1Vy8mIN.webp",
-      alt: "Cocina moderna con encimeras de mármol beige veteado - Ropema Rubio Madrid",
-    },
-    {
-      id: 14,
-      category: "Baños",
-      title: "Baño Moderno con Vistas Urbanas",
-      description: "Exclusivo baño con bañera empotrada y lavabo integrado en mármol beige con gran ventanal",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2b8aaa91-9396-42a4-b475-0481ce681a33-rVPpXBIADiIZfT5ARmBL64JugVKMFJ.webp",
-      alt: "Baño moderno con bañera empotrada en mármol beige y vistas urbanas - Ropema Rubio",
-    },
-    {
-      id: 15,
-      category: "Mesas",
-      title: "Mesa de Comedor Redonda en Mármol Negro",
-      description: "Elegante mesa de comedor redonda en mármol negro con vetas doradas",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5a2147d0-35fe-454e-bed8-b66ea37c1f1a-GjvoxDFANqkce5WHWsqdIFX7oQvNTB.webp",
-      alt: "Mesa de comedor redonda en mármol negro con vetas doradas - Ropema Rubio Madrid",
-    },
-    {
-      id: 16,
-      category: "Baños",
-      title: "Ducha de Lujo con Mármol Veteado",
-      description: "Impresionante ducha revestida en mármol con vetas doradas pronunciadas",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/9bcd1454-c894-41ab-88d8-06152cd954e1-5fZKI3h9U4pTvhPHXyk4Q9FhmQybHP.webp",
-      alt: "Ducha de lujo revestida en mármol con vetas doradas - Ropema Rubio Madrid",
-    },
-    {
-      id: 17,
       category: "Escaleras",
-      title: "Escalera con Iluminación LED Nocturna",
-      description: "Vista nocturna de escalera curva con iluminación LED perimetral integrada",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ce84c305-53ab-4b95-a71f-2aaf884c380c-pqrfKWjhqyu6FyJHx4U94FqHv2VghQ.webp",
-      alt: "Escalera curva con iluminación LED nocturna - Ropema Rubio Madrid",
-    },
-    {
-      id: 18,
-      category: "Encimeras",
-      title: "Cocina Exterior con Vistas Panorámicas",
-      description: "Cocina exterior en terraza con encimeras de cuarzo gris y vistas de la ciudad",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/43a3ced6-6751-4a0b-b948-b77d0691d67e-mIxW42D5C4WcT5ssSlorTwLsw2GbGY.webp",
-      alt: "Cocina exterior con encimeras de cuarzo gris y vistas panorámicas - Ropema Rubio",
-    },
-    {
-      id: 19,
-      category: "Mesas",
-      title: "Mesa de Comedor con Revestimiento de Mármol",
-      description: "Sala de estar con mesa de mármol blanco veteado y mueble con revestimiento de mármol",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5fa91e03-3fbc-49be-8421-5b420ab05b9d-6YTBqq4QaWC2TtVix2oP0qGUEDfNg0.webp",
-      alt: "Mesa de comedor de mármol blanco y mueble con revestimiento - Ropema Rubio Madrid",
+      title: "Escalera de Mármol con Cristal",
+      description: "Escalera de mármol con barandilla de cristal templado",
+      image: "/images/projects/escalera-marmol-cristal.jpg",
+      alt: "Escalera de mármol con cristal - Ropema Rubio",
     },
   ]
 
@@ -210,30 +114,6 @@ export default function Projects() {
   const handleNextImage = () => {
     if (filteredProjects.length === 0) return
     setCurrentImageIndex((prev) => (prev === filteredProjects.length - 1 ? 0 : prev + 1))
-  }
-
-  // Placeholder para usar cuando no hay imagen disponible
-  const placeholderImage = "/placeholder.svg?height=600&width=800"
-
-  if (!mounted) {
-    return (
-      <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <div className="animate-pulse">
-              <div className="h-8 bg-gray-300 rounded mb-4 mx-auto w-64"></div>
-              <div className="h-12 bg-gray-300 rounded mb-6 mx-auto w-96"></div>
-              <div className="h-4 bg-gray-300 rounded mb-6 mx-auto w-24"></div>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="aspect-square bg-gray-300 rounded-xl animate-pulse"></div>
-            ))}
-          </div>
-        </div>
-      </section>
-    )
   }
 
   return (
@@ -292,18 +172,10 @@ export default function Projects() {
                     <div className="aspect-square relative overflow-hidden">
                       <Image
                         src={project.image || "/placeholder.svg"}
-                        alt={project.alt || project.title}
+                        alt={project.alt}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        placeholder="blur"
-                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement
-                          if (target.src !== placeholderImage) {
-                            target.src = placeholderImage
-                          }
-                        }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                         <h3 className="text-white font-bold text-xl mb-2">{project.title}</h3>
@@ -316,7 +188,7 @@ export default function Projects() {
                   {filteredProjects.length > 0 && (
                     <div className="relative h-[80vh] w-full bg-black/90 rounded-xl overflow-hidden">
                       <Image
-                        src={filteredProjects[currentImageIndex]?.image || placeholderImage}
+                        src={filteredProjects[currentImageIndex]?.image || "/placeholder.svg"}
                         alt={
                           filteredProjects[currentImageIndex]?.alt ||
                           filteredProjects[currentImageIndex]?.title ||
@@ -325,12 +197,6 @@ export default function Projects() {
                         fill
                         className="object-contain"
                         sizes="100vw"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement
-                          if (target.src !== placeholderImage) {
-                            target.src = placeholderImage
-                          }
-                        }}
                       />
                       <div className="absolute bottom-0 left-0 right-0 bg-black/70 backdrop-blur-sm p-4 text-white">
                         <h3 className="text-xl font-bold mb-1">{filteredProjects[currentImageIndex]?.title}</h3>

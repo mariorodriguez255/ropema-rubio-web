@@ -3,55 +3,9 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ChevronDown, Sparkles } from "lucide-react"
-import { useState, useEffect } from "react"
 import Image from "next/image"
 
 export default function Hero() {
-  // Estado para controlar qué imagen mostrar basado en el tamaño de pantalla
-  const [isMobile, setIsMobile] = useState(false)
-  const [mounted, setMounted] = useState(false)
-
-  // Definir imágenes de respaldo en caso de que las principales fallen
-  const fallbackDesktopImage = "/placeholder.svg?height=1080&width=1920"
-  const fallbackMobileImage = "/placeholder.svg?height=1080&width=720"
-
-  // Efecto para detectar el tamaño de pantalla
-  useEffect(() => {
-    setMounted(true)
-    const checkIfMobile = () => {
-      setIsMobile(window.innerWidth < 768) // 768px es el breakpoint md de Tailwind
-    }
-
-    // Verificar inicialmente
-    checkIfMobile()
-
-    // Agregar listener para cambios de tamaño
-    window.addEventListener("resize", checkIfMobile)
-
-    // Limpiar listener
-    return () => window.removeEventListener("resize", checkIfMobile)
-  }, [])
-
-  if (!mounted) {
-    return (
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900">
-        <div className="container mx-auto px-4 z-10 pt-16 relative">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="animate-pulse">
-              <div className="h-8 bg-gray-700 rounded mb-6 mx-auto w-64"></div>
-              <div className="h-16 bg-gray-700 rounded mb-6"></div>
-              <div className="h-6 bg-gray-700 rounded mb-8 mx-auto w-96"></div>
-              <div className="flex gap-4 justify-center">
-                <div className="h-12 bg-gray-700 rounded w-32"></div>
-                <div className="h-12 bg-gray-700 rounded w-32"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
   return (
     <section
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
@@ -61,47 +15,15 @@ export default function Hero() {
       {/* Background Image with overlay */}
       <div className="absolute inset-0 z-0">
         <div className="relative w-full h-full">
-          {/* Imagen para móvil */}
-          {isMobile && (
-            <Image
-              src="/images/hero/marble-interior-mobile.jpg"
-              alt="Interior elegante con paredes de mármol blanco y nichos iluminados - Ropema Rubio"
-              fill
-              priority
-              className="object-cover"
-              sizes="100vw"
-              quality={75}
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
-              onError={(e) => {
-                const target = e.target as HTMLImageElement
-                if (target.src !== fallbackMobileImage) {
-                  target.src = fallbackMobileImage
-                }
-              }}
-            />
-          )}
-
-          {/* Imagen para escritorio */}
-          {!isMobile && (
-            <Image
-              src="/images/hero/marble-reception-desk.jpg"
-              alt="Mostrador de recepción en mármol negro elegante - Trabajo realizado por Ropema Rubio"
-              fill
-              priority
-              className="object-cover"
-              sizes="100vw"
-              quality={75}
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
-              onError={(e) => {
-                const target = e.target as HTMLImageElement
-                if (target.src !== fallbackDesktopImage) {
-                  target.src = fallbackDesktopImage
-                }
-              }}
-            />
-          )}
+          <Image
+            src="/images/hero/marble-reception-desk.jpg"
+            alt="Mostrador de recepción en mármol negro elegante - Trabajo realizado por Ropema Rubio"
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+            quality={75}
+          />
 
           {/* Modern gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/60"></div>
