@@ -4,13 +4,18 @@ import { useState, useEffect } from "react"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import ClientImage from "./client-image"
+import Image from "next/image"
 
 export default function Projects() {
   const categories = ["Todos", "Encimeras", "Revestimientos", "Escaleras", "Baños", "Recepciones", "Chimeneas", "Mesas"]
   const [activeCategory, setActiveCategory] = useState("Todos")
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // Proyectos con las nuevas imágenes clasificadas
   const projects = [
@@ -210,6 +215,27 @@ export default function Projects() {
   // Placeholder para usar cuando no hay imagen disponible
   const placeholderImage = "/placeholder.svg?height=600&width=800"
 
+  if (!mounted) {
+    return (
+      <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <div className="animate-pulse">
+              <div className="h-8 bg-gray-300 rounded mb-4 mx-auto w-64"></div>
+              <div className="h-12 bg-gray-300 rounded mb-6 mx-auto w-96"></div>
+              <div className="h-4 bg-gray-300 rounded mb-6 mx-auto w-24"></div>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="aspect-square bg-gray-300 rounded-xl animate-pulse"></div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section
       id="projects"
@@ -264,12 +290,20 @@ export default function Projects() {
                 <DialogTrigger asChild>
                   <div className="group relative overflow-hidden rounded-xl cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 bg-white dark:bg-gray-800">
                     <div className="aspect-square relative overflow-hidden">
-                      <ClientImage
-                        src={project.image}
-                        fallbackSrc={placeholderImage}
+                      <Image
+                        src={project.image || "/placeholder.svg"}
                         alt={project.alt || project.title}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement
+                          if (target.src !== placeholderImage) {
+                            target.src = placeholderImage
+                          }
+                        }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                         <h3 className="text-white font-bold text-xl mb-2">{project.title}</h3>
@@ -281,9 +315,8 @@ export default function Projects() {
                 <DialogContent className="max-w-5xl p-0 bg-transparent border-none">
                   {filteredProjects.length > 0 && (
                     <div className="relative h-[80vh] w-full bg-black/90 rounded-xl overflow-hidden">
-                      <ClientImage
-                        src={filteredProjects[currentImageIndex]?.image}
-                        fallbackSrc={placeholderImage}
+                      <Image
+                        src={filteredProjects[currentImageIndex]?.image || placeholderImage}
                         alt={
                           filteredProjects[currentImageIndex]?.alt ||
                           filteredProjects[currentImageIndex]?.title ||
@@ -291,6 +324,13 @@ export default function Projects() {
                         }
                         fill
                         className="object-contain"
+                        sizes="100vw"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement
+                          if (target.src !== placeholderImage) {
+                            target.src = placeholderImage
+                          }
+                        }}
                       />
                       <div className="absolute bottom-0 left-0 right-0 bg-black/70 backdrop-blur-sm p-4 text-white">
                         <h3 className="text-xl font-bold mb-1">{filteredProjects[currentImageIndex]?.title}</h3>

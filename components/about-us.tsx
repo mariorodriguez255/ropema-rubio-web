@@ -3,34 +3,31 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Award, Clock, Users, Gem } from "lucide-react"
 
 export default function AboutUs() {
-  // Definir una imagen de respaldo
-  const fallbackImage = "/placeholder.svg?height=800&width=600"
-
   const features = [
     {
       icon: <Award className="h-8 w-8 text-blue-500" />,
       title: "Calidad Premium en Mármoles y Granitos",
       description: "Seleccionamos los mejores materiales para garantizar resultados excepcionales en cada proyecto.",
-      gradient: "from-transparent to-transparent",
+      gradient: "from-blue-500/10 to-primary/10",
     },
     {
       icon: <Clock className="h-8 w-8 text-primary" />,
       title: "Más de 75 Años de Experiencia",
       description: "Desde 1946 perfeccionando el arte del mármol, granito y porcelánicos en Madrid.",
-      gradient: "from-transparent to-transparent",
+      gradient: "from-primary/10 to-green-600/10",
     },
     {
       icon: <Users className="h-8 w-8 text-green-600" />,
       title: "Equipo Profesional Especializado",
       description: "Artesanos con amplia formación y experiencia en el trabajo con piedra natural y porcelánicos.",
-      gradient: "from-transparent to-transparent",
+      gradient: "from-green-600/10 to-teal-500/10",
     },
     {
       icon: <Gem className="h-8 w-8 text-teal-500" />,
       title: "Proyectos Personalizados",
       description:
         "Adaptamos cada trabajo a las necesidades específicas de nuestros clientes, desde el diseño hasta la instalación.",
-      gradient: "from-transparent to-transparent",
+      gradient: "from-teal-500/10 to-purple-500/10",
     },
   ]
 
@@ -63,6 +60,9 @@ export default function AboutUs() {
               alt="Fachada del taller de Ropema Rubio en Madrid - Especialistas en mármoles y granitos"
               fill
               className="object-cover rounded-2xl transition-transform duration-700 group-hover:scale-105"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
           </div>
@@ -100,15 +100,13 @@ export default function AboutUs() {
             >
               <CardContent className="p-8 text-center relative overflow-hidden">
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
+                  className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
                 ></div>
-                <div
-                  className={`w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${feature.gradient} p-4 shadow-lg transform group-hover:scale-110 transition-transform duration-300`}
-                >
+                <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 p-4 shadow-lg transform group-hover:scale-110 transition-transform duration-300 relative z-10">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{feature.description}</p>
+                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white relative z-10">{feature.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed relative z-10">{feature.description}</p>
               </CardContent>
             </Card>
           ))}
